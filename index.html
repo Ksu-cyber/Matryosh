@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Authentication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
-$END$
+    <header class="game-header">
+    <nav class="game-header-menu">
+        <a class="game-header__logo"  href="#">MATRYOSHKA QUEST</a>
+        <ul class="game-header__user-menu">
+            <li class="user-menu__item user-menu__item-rate">
+                <a id="user-menu__link-rate" href="#">
+                    <img src="images/icon-rate.png" class="rate" alt="rate">
+                </a>
+            </li>
+            <li class="user-menu__item user-menu__item-exit">
+                <a id="user-menu__link-exit">
+                    <img src="images/icon-exit.png" class="exit" alt="exit">
+                </a>
+            </li>
+        </ul>
+    </nav>
+    </header>
+
+    <div class="content">
+        <div class="container">
+            <h2 id="form-title">РЕГИСТРАЦИЯ</h2>
+            <div id="message" style="color: red;"></div>
+            <form id="auth-form">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Имя пользователя*" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Пароль*" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="submit-button">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+                </div>
+            </form>
+            <div class="toggle-link" id="toggle-link">
+                <p id="haveAcc">Есть аккаунт? Авторизуйтесь</p>
+                <button type="submit" id="go-to-button">ВОЙТИ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
 </body>
 </html>

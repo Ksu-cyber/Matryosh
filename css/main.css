@@ -1,0 +1,74 @@
+:root {
+    --border-color: #BC7B77;
+    --bg-color-main: #fcfcfc;
+
+}
+
+body {
+    font-family: Ubuntu, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color-main);
+
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+body, html {
+    overflow-x: hidden;
+}
+
+.game-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+.game-header-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    height: 65px;
+    padding: 0 20px;
+    border-bottom: 3px solid var(--border-color);
+    background-color: #f0e9e9;
+}
+
+.game-header__logo {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    margin-left: -200px;
+    height: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700; /* Жирный текст */
+    font-size: 37px; /* Размер текста */
+    text-decoration: none; /* Убирает подчеркивание (опционально) */
+    cursor: pointer;
+    color: black;
+}
+
+ul {
+    list-style: none;
+}
+.game-header__user-menu {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.user-menu__item {
+    margin-left: 20px;
+}
+
+
+

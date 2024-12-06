@@ -1,8 +1,8 @@
 {
-  "name": "${PROJECT_NAME}",
+  "name": "Game_Pankratova_MatryoshkaQuest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "js/auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
