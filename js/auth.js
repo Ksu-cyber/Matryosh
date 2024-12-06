@@ -46,8 +46,6 @@ authForm.addEventListener('submit', (e) => {
             messageDiv.style.color = 'green';
             messageDiv.textContent = 'Регистрация успешна!';
         }
-        usernameInput.value = '';
-        passwordInput.value = '';
     } else {
         const storedPassword = localStorage.getItem(username);
         if (storedPassword === password) {
@@ -60,8 +58,9 @@ authForm.addEventListener('submit', (e) => {
         } else {
             messageDiv.style.color = 'red';
             messageDiv.textContent = 'Неверный логин или пароль';
-            usernameInput.value = '';
-            passwordInput.value = '';
         }
     }
+
+    usernameInput.value = '';
+    passwordInput.value = '';
 });
