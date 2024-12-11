@@ -154,15 +154,27 @@ function createAndAnimateMatryoshka() {
     matryoshkaContainer.append(matryoshkaImage);
 
     // Генерация случайной горизонтальной позиции
-    const randomX = Math.random() * (window.innerWidth - 80); // 100 - ширина изображения
+    const randomX = Math.random() * (window.innerWidth - 80);
 
     // Начальная позиция сверху
     matryoshkaImage.style.left = `${randomX}px`;
 
+    // // Запуск анимации (перемещение вниз)
+    // setTimeout(() => {
+    //     matryoshkaImage.style.top = `${window.innerHeight - 150}px`;  // Позиция чуть выше нижней части окна
+    // }, 50); // Небольшая задержка, чтобы сработала анимация
+
+
     // Запуск анимации (перемещение вниз)
     setTimeout(() => {
-        matryoshkaImage.style.top = `${window.innerHeight - 150}px`;  // Позиция чуть выше нижней части окна
+        // Вычисляем нижнюю границу контейнера MatryoshkaContainer
+        const containerRect = matryoshkaContainer.getBoundingClientRect();
+        const containerBottom = containerRect.top + containerRect.height;
+
+        // Устанавливаем конечную позицию для матрешки
+        matryoshkaImage.style.top = `${containerBottom - matryoshkaImage.offsetHeight}px`; // С учётом высоты матрешки
     }, 50); // Небольшая задержка, чтобы сработала анимация
+
 
 
     // Обработчик для изменения масштаба с помощью кнопок мыши
