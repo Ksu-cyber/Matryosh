@@ -1,0 +1,79 @@
+/*p {*/
+/*    font-family: 'Cormorant Garamond', serif;*/
+/*}*/
+
+@font-face {
+    font-family: 'Squares Condensed Regular';
+    src: url('../fonts/tt-squares-condensed-8.ttf')  format('truetype');
+    font-weight: 500; /* Если шрифт имеет особый вес */
+    font-style: normal; /* Если это обычный стиль шрифта */
+}
+
+#gameInfo {
+    font-family: 'Squares Condensed Regular', sans-serif;  /* Применяем шрифт */
+    font-size: 19px;  /* Размер шрифта */
+    /*font-weight: 400;*/
+    margin-top: 0;
+}
+
+#timer {
+    font-family: 'Squares Condensed Regular', sans-serif;/* Применяем шрифт */
+    font-size: 19px;  /* Размер шрифта */
+
+}
+
+#game_field {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    height: 100vh;
+    margin: 30px;
+}
+
+
+#matryoshkaField {
+    /*position: relative;*/
+    width: 500px;
+    height: 150px;
+    background-color: #f0f0f0;
+    padding: 50px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+#matryoshkaContainer {
+    /*display: flex;*/
+    /*justify-content: space-around;*/
+    margin-top: 20px;
+    height: 100px;
+    width: 70%;
+}
+
+.matryoshka {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    transition: transform 1s ease-out, top 1s ease-out;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#finishBtn {
+    background-color: white;
+    color: #ebd3d3;
+    width: 50%;
+    font-family: 'Squares Condensed Regular', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px solid #ebd3d3;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Плавный переход для цвета и эффекта */
+    margin-top: 50px;
+}
+
+#finishBtn:hover {
+    background-color: #f0e9e9; /* Более темный синий при наведении */
+}
+

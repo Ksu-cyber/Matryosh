@@ -2,6 +2,12 @@
     --border-color: #BC7B77;
     --bg-color-main: #fcfcfc;
 }
+@font-face {
+    font-family: 'Squares Condensed Regular';
+    src: url('../fonts/tt-squares-condensed-8.ttf')  format('truetype');
+    font-weight: 500; /* Если шрифт имеет особый вес */
+    font-style: normal; /* Если это обычный стиль шрифта */
+}
 
 .content {
     display: flex;
@@ -49,14 +55,14 @@
 }
 
 .form-group input::placeholder {
-    color: #cccac4; /* Цвет текста заполнителя */
+    color: #cccac4;
     font-size: 16px;
-    font-family: Ubuntu, sans-serif;
+    font-family: 'Squares Condensed Regular', sans-serif;
 }
 .form-group input:focus {
-    border-color: #ba6661; /* Изменяем цвет границы */
-    box-shadow: 0 0 5px #b86b67; /* Добавляем эффект свечения */
-    outline: none; /* Убираем стандартную синюю рамку браузера */
+    border-color: #ba6661;
+    box-shadow: 0 0 5px #b86b67;
+    outline: none;
 }
 
 /* Основной стиль кнопки */
@@ -64,14 +70,13 @@
      background-color: #f0e9e9;
      color: black;
      width: 100%;
-     font-family: Ubuntu, sans-serif;
-     font-size: 16px; /* Размер текста */
-     font-weight: 500; /* Толщина шрифта */
-     padding: 10px 20px; /* Внутренние отступы */
-     border: 2px; /* Убираем рамку */
-     border-radius: 5px; /* Скругленные углы */
-     cursor: pointer; /* Указатель при наведении */
-     transition: background-color 0.3s ease; /* Плавный переход для цвета и эффекта */
+     font-family: 'Squares Condensed Regular', sans-serif;
+     font-size: 16px;
+     padding: 10px 20px;
+     border: 2px;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
  }
 
 /* Стиль при наведении */
@@ -83,9 +88,8 @@
     background-color: white;
     color: #ebd3d3;
     width: 100%;
-    font-family: Ubuntu, sans-serif;
+    font-family: 'Squares Condensed Regular', sans-serif;
     font-size: 16px;
-    font-weight: 500;
     padding: 10px 20px;
     border: 2px solid #ebd3d3;
     border-radius: 5px;

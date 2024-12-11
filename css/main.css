@@ -1,15 +1,20 @@
 :root {
     --border-color: #BC7B77;
     --bg-color-main: #fcfcfc;
+}
 
+@font-face {
+    font-family: 'Squares Condensed Regular';
+    src: url('../fonts/tt-squares-condensed-8.ttf')  format('truetype');
+    font-weight: 500; /* Если шрифт имеет особый вес */
+    font-style: normal; /* Если это обычный стиль шрифта */
 }
 
 body {
-    font-family: Ubuntu, sans-serif;
+    font-family: 'Squares Condensed Regular', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--bg-color-main);
-
 }
 
 .content {
@@ -24,7 +29,6 @@ body, html {
 }
 
 .game-header {
-    position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
@@ -49,9 +53,9 @@ body, html {
     margin-left: -200px;
     height: 36px;
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 700; /* Жирный текст */
-    font-size: 37px; /* Размер текста */
-    text-decoration: none; /* Убирает подчеркивание (опционально) */
+    font-weight: 700;
+    font-size: 37px;
+    text-decoration: none;
     cursor: pointer;
     color: black;
 }

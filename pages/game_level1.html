@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <title>Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/game_1.css">
 </head>
 <body>
     <header class="game-header">
@@ -26,11 +29,17 @@
         </nav>
     </header>
 
-    <div class="content">
-
+    <div id="game_field">
+        <p id="gameInfo">Нажмите пробел, чтобы начать игру!</p>
+        <div id="timer">00:00</div>
+        <div id="current_score">Баллы: 0</div>
+        <div id="matryoshkaField"></div>
+        <div id="matryoshkaContainer"></div>
+        <button id="finishBtn" style="display: none;">Завершить сбор</button>
 
     </div>
 
+    <script src="../js/game_1.js"></script>
     <script src="../js/logout.js"></script>
 </body>
 </html>
