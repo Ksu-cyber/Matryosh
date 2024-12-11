@@ -81,7 +81,7 @@
 
 /* Стиль при наведении */
 #submit-button:hover {
-    background-color: var(--border-color); /* Более темный синий при наведении */
+    background-color: var(--border-color); /* Более темный при наведении */
 }
 
 #go-to-button {

@@ -11,7 +11,6 @@ const matryoshkaColors1 = [
     'жёлтых'   // 5
 ];
 
-
 const matryoshkaColors = [
     { name: 'синих', color: '#46A5DE' },
     { name: 'зелёных', color: '#3F975A' },
@@ -43,9 +42,9 @@ function startGame() {
 
     document.addEventListener('keydown', handleKeyPress);
 
-    matryoshkaField.addEventListener("dragover", handleDragOverField);
+    matryoshkaField.addEventListener("dragover", handleDragOver);
     matryoshkaField.addEventListener("drop", handleDropInField);
-    matryoshkaContainer.addEventListener("dragover", handleDragOverContainer);
+    matryoshkaContainer.addEventListener("dragover", handleDragOver);
     matryoshkaContainer.addEventListener("drop", handleDropInContainer);
 }
 
@@ -60,18 +59,32 @@ function generateQuestion() {
     gameInfo.innerHTML = `Собери матрёшку из <span style="color: ${(matryoshkaColors[neededMatryoshkaColor]).color};">${(matryoshkaColors[neededMatryoshkaColor]).name}</span> матрёшек за 3 минуты!`;
 }
 
+// Таймер
+function startTimer() {
+    timer = setInterval(() => {
+        if (timeRemaining <= 0) {
+            clearInterval(timer);
+
+            endGame();
+        } else {
+            timeRemaining--;
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            timerDiv.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
 function handleKeyPress(event) {
     if (event.key === 'Enter') {
         createAndAnimateMatryoshka();
     }
 }
 
-function handleDragOverField(e) {
+function handleDragOver(e) {
     e.preventDefault()
 }
-function handleDragOverContainer(e) {
-    e.preventDefault()
-}
+
 function handleDropInField(e) {
     e.preventDefault();
 
@@ -125,22 +138,6 @@ function handleDropInField1(e) {
 }
 
 
-// Таймер
-function startTimer() {
-    timer = setInterval(() => {
-        if (timeRemaining <= 0) {
-            clearInterval(timer);
-
-            endGame();
-        } else {
-            timeRemaining--;
-            let minutes = Math.floor(timeRemaining / 60);
-            let seconds = timeRemaining % 60;
-            timerDiv.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
-    }, 1000);
-}
-
 function createAndAnimateMatryoshka() {
     matryoshkaContainer.innerHTML = "";
 
@@ -167,11 +164,6 @@ function createAndAnimateMatryoshka() {
         matryoshkaImage.style.top = `${window.innerHeight - 150}px`;  // Позиция чуть выше нижней части окна
     }, 50); // Небольшая задержка, чтобы сработала анимация
 
-    // // Добавление обработчика клика на каждую матрешку
-    // matryoshkaImage.addEventListener('click', function() {
-    //     // Убираем выделение с других матрешек
-    //     const allMatryoshkas = document.querySelectorAll('.matryoshka');
-    // });
 
     // Обработчик для изменения масштаба с помощью кнопок мыши
     let scale = 1;
@@ -231,12 +223,6 @@ function calculateScore() {
         }
 
         score = Math.round(Math.max(0, points) * 10) / 10;
-
-        console.log(timeRemaining);
-        console.log(timeRemaining/6);
-        console.log(count);
-        console.log(points);
-        console.log(score);
     }
 }
 
@@ -278,10 +264,11 @@ function saveScore() {
 // Функция для получения всех матрешек с их текущими координатами и scale
 function getMatryoshkaPositions() {
     let matryoshkas;
+    let positions;
     matryoshkas = Array.from(matryoshkaField.querySelectorAll('.matryoshka'));
 
     // Получаем позицию и scale для каждой матрешки
-    const positions = matryoshkas.map(matryoshka => {
+    positions = matryoshkas.map(matryoshka => {
         const rect = matryoshka.getBoundingClientRect(); // Позиция на экране
         const color = matryoshka.getAttribute('data-color');
         const scale = matryoshka.style.transform ? parseFloat(matryoshka.style.transform.replace('scale(', '').replace(')', '')) : 1;

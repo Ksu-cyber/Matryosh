@@ -36,10 +36,12 @@
     /*position: relative;*/
     width: 500px;
     height: 150px;
-    background-color: #f0f0f0;
+    background-color: #DBC7C9;
+    box-shadow: 0 0 15px 8px #CD9B9D;
     padding: 50px;
     margin: 20px auto;
     border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 #matryoshkaContainer {
