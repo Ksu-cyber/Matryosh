@@ -1,35 +1,48 @@
-let timer;
-let timeRemaining = 180; // 3 минуты
-let isGameStarted = false;
-let currentScore = 0;
-const matryoshkaColors1 = [
-    'синих',   // 0
-    'зелёных', // 1
-    'оранжевых', // 2
-    'фиолетовых', // 3
-    'красных', // 4
-    'жёлтых'   // 5
-];
+
+let timer,
+    timeRemaining = 180,
+    isGameStarted = false,
+    score = 0,
+    draggedMatryoshka = null,
+    neededMatryoshkaColor = 0;
 
 const matryoshkaColors = [
-    { name: 'синих', color: '#46A5DE' },
-    { name: 'зелёных', color: '#3F975A' },
-    { name: 'оранжевых', color: '#FFCB33' },
-    { name: 'фиолетовых', color: '#D645DE' },
-    { name: 'красных', color: '#DE4545' },
-    { name: 'жёлтых', color: '#F6F25E' }
+    {name: 'синих', color: '#46A5DE'},
+    {name: 'зелёных', color: '#3F975A'},
+    {name: 'оранжевых', color: '#FFCB33'},
+    {name: 'фиолетовых', color: '#D645DE'},
+    {name: 'красных', color: '#DE4545'},
+    {name: 'жёлтых', color: '#F6F25E'}
 ];
 
-let score = 0;
-let currentQuestion = {};
-let draggedMatryoshka = null
-let neededMatryoshkaColor = 0;
-const timerDiv = document.getElementById('timer');
-const gameInfo = document.getElementById('gameInfo');
-const matryoshkaField = document.getElementById('matryoshkaField');
-const matryoshkaContainer = document.getElementById('matryoshkaContainer');
-const finishBtn = document.getElementById('finishBtn');
-const scoreElement = document.getElementById('current_score');
+const timerDiv = document.getElementById('timer'),
+    gameInfo = document.getElementById('gameInfo'),
+    matryoshkaField = document.getElementById('matryoshkaField'),
+    matryoshkaContainer = document.getElementById('matryoshkaContainer'),
+    finishBtn = document.getElementById('finishBtn'),
+    scoreElement = document.getElementById('current_score');
+
+const restartModal = document.getElementById('restartModal'),
+    confirmRestartButton = document.getElementById('confirmRestart'),
+    cancelRestartButton = document.getElementById('cancelRestart');
+
+
+// Таймер
+function startTimer() {
+    timer = setInterval(() => {
+        if (timeRemaining <= 0) {
+            clearInterval(timer);
+
+            endGame();
+        } else {
+            timeRemaining--;
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            timerDiv.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+    }, 1000);
+}
+
 
 // Начало игры
 function startGame() {
@@ -48,32 +61,14 @@ function startGame() {
     matryoshkaContainer.addEventListener("drop", handleDropInContainer);
 }
 
+
 // Генерация случайного вопроса
 function generateQuestion() {
     neededMatryoshkaColor = Math.floor(Math.random() * matryoshkaColors.length);
 
-    // const randomCount = Math.floor(Math.random() * 5) + 1;
-    // currentQuestion = { color: randomMatryoshka, count: randomCount };
-    currentQuestion = { color: neededMatryoshkaColor};
-    // gameInfoElement.innerText = `Собери матрешку из ${randomCount} ${randomMatryoshka} матрешек`;
     gameInfo.innerHTML = `Собери матрёшку из <span style="color: ${(matryoshkaColors[neededMatryoshkaColor]).color};">${(matryoshkaColors[neededMatryoshkaColor]).name}</span> матрёшек за 3 минуты!`;
 }
 
-// Таймер
-function startTimer() {
-    timer = setInterval(() => {
-        if (timeRemaining <= 0) {
-            clearInterval(timer);
-
-            endGame();
-        } else {
-            timeRemaining--;
-            let minutes = Math.floor(timeRemaining / 60);
-            let seconds = timeRemaining % 60;
-            timerDiv.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
-    }, 1000);
-}
 
 function handleKeyPress(event) {
     if (event.key === 'Enter') {
@@ -81,9 +76,11 @@ function handleKeyPress(event) {
     }
 }
 
+
 function handleDragOver(e) {
     e.preventDefault()
 }
+
 
 function handleDropInField(e) {
     e.preventDefault();
@@ -116,6 +113,7 @@ function handleDropInField(e) {
     matryoshkaField.append(draggedMatryoshka);
 }
 
+
 function handleDropInContainer(e) {
     e.preventDefault();
     draggedMatryoshka.classList.remove('is-dragging');
@@ -126,6 +124,8 @@ function handleDropInContainer(e) {
     draggedMatryoshka.style.top = "0";
     matryoshkaContainer.append(draggedMatryoshka);
 }
+
+
 function handleDropInField1(e) {
     e.preventDefault();
 
@@ -161,7 +161,7 @@ function createAndAnimateMatryoshka() {
 
     // Запуск анимации (перемещение вниз)
     setTimeout(() => {
-        matryoshkaImage.style.top = `${window.innerHeight - 120}px`;  // Позиция чуть выше нижней части окна
+        matryoshkaImage.style.top = `${window.innerHeight - 95}px`;  // Позиция чуть выше нижней части окна
     }, 50); // Небольшая задержка, чтобы сработала анимация
 
 
@@ -199,10 +199,6 @@ function createAndAnimateMatryoshka() {
 // Проверка правильности сборки
 finishBtn.addEventListener('click', () => {
     endGame();
-    if (score === 0)
-    {
-        alert('Ошибка в сборке!');
-    }
 });
 
 
@@ -210,13 +206,13 @@ finishBtn.addEventListener('click', () => {
 function calculateScore() {
     let count = 0;
     let elements = null;
-    let timeTaken = 0;
     let points = 0;
 
-    if (checkOrder()) {
-        elements = matryoshkaField.querySelectorAll('.matryoshka')
-        count = elements.length;
-        points = (timeRemaining/ 6) * (count > 0 ? 1: 0) + count * 5;
+    elements = matryoshkaField.querySelectorAll('.matryoshka')
+    count = elements.length;
+
+    if (count > 1 && checkOrder() == true) {
+        points = (timeRemaining/ 6) + count * 5;
 
         if (timeRemaining === 0) {
             points -= 4;
@@ -226,38 +222,59 @@ function calculateScore() {
     }
 }
 
-// // Обновление счета
-// function updateScore(score) {
-//     scoreElement.innerText = `Баллы: ${score}`;
-// }
+
+// Обновление счета
+function updateScore(score) {
+    scoreElement.innerText = `Баллы: ${score}`;
+}
+
 
 // Конец игры
 function endGame() {
     isGameStarted = false;
+    document.removeEventListener('keydown', handleSpacebarPress);
     document.removeEventListener('keydown', handleKeyPress);
     clearInterval(timer);
     finishBtn.style.display = 'none';
 
-
     calculateScore();
-    gameInfo.innerText = 'Игра завершена! Ваши баллы: ' + score;
-    saveScore();
 
+    if (score === 0)
+    {
+        alert('Ошибка в сборке! Перепройдите уровень.');
+        setTimeout(() => {
+            location.reload();
+        }, 4000);
+
+    }
+
+    gameInfo.innerText = 'Игра завершена! Ваши баллы: ' + score;
+    updateScore(score);
+    saveScore(score);
 
     setTimeout(() => {
-        location.reload();
-    }, 4000);
+        restartModal.style.display = 'block'; // Показываем окно подтверждения
 
+        confirmRestartButton.addEventListener('click', function() {
+            location.reload();
+        });
+
+        cancelRestartButton.addEventListener('click', function() {
+            window.location.href = 'game_level2.html'; // Переходим на следующий уровень
+        });
+    }, 1300);
 }
 
-// Сохранение результата в localStorage
-function saveScore() {
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-        const userScores = JSON.parse(localStorage.getItem('userScores')) || {};
-        userScores[user] = score;
-        localStorage.setItem('userScores', JSON.stringify(userScores));
+
+function saveScore(score) {
+    let newScore = score;
+
+    if (localStorage.getItem('currentUser_lvl1_score') != null) {
+        const currentScore = parseFloat(localStorage.getItem('currentUser_lvl1_score')) || 0;
+        newScore = (currentScore > score) ? currentScore : score;
     }
+
+    localStorage.setItem('currentUser_lvl1_score', newScore);
 }
 
 
@@ -298,7 +315,7 @@ function checkOrder() {
         const current = positions[i];
 
         // Если предыдущий элемент имеет большее значение scale, порядок нарушен
-        if (prev.scale > current.scale) {
+        if (prev.scale >= current.scale) {
             console.log("Порядок нарушен по scale!");
             return false;
         }
@@ -312,17 +329,18 @@ function checkOrder() {
     return true;
 }
 
-// Вызываем функцию для проверки порядка после того, как элементы были перетащены или перемещены
-matryoshkaField.addEventListener("drop", function (e) {
-    handleDropInField(e);  // Обрабатываем перетаскивание
-    checkOrder();  // Проверяем порядок по X и scale
-});
+// // Вызываем функцию для проверки порядка после того, как элементы были перетащены или перемещены
+// matryoshkaField.addEventListener("drop", function (e) {
+//     handleDropInField(e);  // Обрабатываем перетаскивание
+//     checkOrder();  // Проверяем порядок по X и scale
+//     calculateScore();
+// });
 
-// Запуск игры по нажатию пробела
-document.addEventListener('keydown', (event) => {
+function handleSpacebarPress(event) {
     if (event.key === ' ' && !isGameStarted) {
         event.preventDefault();
         startGame();
     }
-});
+}
 
+document.addEventListener('keydown', handleSpacebarPress);

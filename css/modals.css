@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-#confirmExit, #cancelExit {
+#confirmExit, #cancelExit, #confirmRestart, #cancelRestart {
     background-color: #f0e9e9;
     color: black;
     width: 30%;
@@ -34,15 +34,11 @@
     transition: background-color 0.3s ease;
 }
 
-#confirmExit {
-    margin-bottom: 5px;
-}
-
 /* Стиль при наведении */
-#confirmExit:hover, #cancelExit:hover {
+#confirmExit:hover, #cancelExit:hover, #confirmRestart:hover, #cancelRestart:hover {
     background-color: #BC7B77; /* Более темный при наведении */
 }
 
-/*#exitModal {*/
-/*    display: none;*/
-/*}*/
+#exitModal,#restartModal {
+    display: none;
+}

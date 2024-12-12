@@ -47,8 +47,10 @@
 }
 
 #matryoshkaContainer {
-    /*display: flex;*/
+    display: flex;
+    flex-wrap: wrap;
     /*justify-content: space-around;*/
+    gap: 20px;
     margin-top: 20px;
     height: 100px;
     width: 70%;
@@ -57,13 +59,19 @@
 .matryoshka {
     position: absolute;
     top: 0;
-    width: 80px;
     transition: transform 1s ease-out, top 1s ease-out;
     opacity: 1;
     cursor: pointer;
 }
 
+.matryoshka_img {
+    width: 80px;
+}
 
+.matryoshka_name {
+    margin: 0;
+    text-align: center;
+}
 
 #finishBtn {
     background-color: white;
@@ -85,6 +93,6 @@
 
 .level_number {
     margin-top: 0;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 }
 

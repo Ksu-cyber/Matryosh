@@ -8,7 +8,8 @@
 
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/game_1.css">
-    <link rel="stylesheet" href="../css/exitModal.css">
+    <link rel="stylesheet" href="../css/modals.css">
+    <link rel="stylesheet" href="../css/instructionDialog.css">
 </head>
 <body>
     <header class="game-header">
@@ -16,7 +17,7 @@
             <a class="game-header__logo"  href="#">MATRYOSHKA QUEST</a>
             <ul class="game-header__user-menu">
                 <li class="user-menu__item user-menu__item-rate">
-                    <a id="user-menu__link-rate" href="#">
+                    <a id="user-menu__link-rate" href="../pages/rate.html">
                         <img src="../images/icon-rate.png" class="rate" alt="rate">
                     </a>
                 </li>
@@ -29,7 +30,26 @@
         </nav>
     </header>
 
+    <!-- Окно инструкции -->
+    <dialog id="instructionDialog">
+        <div class="dialog-content">
+            <h2>Добро пожаловать в Matryoshka Quest!</h2>
+            <p>Соберите матрёшку по возрастанию размера из фигур одного цвета.</p>
+            <p>Клавиши управления:</p>
+            <ul class="instruction-dialog__list">
+                <li>Нажмите <strong>Space</strong> для начала игры.</li>
+                <li>Нажмите <strong>Enter</strong>, чтобы появилась новая матрёшка.</li>
+                <li>Нажмите <strong>правую кнопку мыши</strong> для увеличения фигуры, а <strong>левую</strong> для уменьшения.</li>
+                <li>Перетаскивайте матрёшку в розовую область, чтобы собрать её целиком.</li>
+                <li>Нажмите <strong>Esc</strong>, чтобы поставить на паузу или выйти из игры.</li>
+                <li>Нажмите <strong>Завершить сбор</strong>, когда закончите собирать матрёшку.</li>
+            </ul>
+        </div>
+        <button class="close-button" id="closeDialogButton">Понятно!</button>
+    </dialog>
+
     <div id="game_field">
+        <h2 class="level_number">Уровень 1</h2>
         <p id="gameInfo">Нажмите пробел, чтобы начать игру!</p>
         <div id="timer">00:00</div>
         <div id="current_score">Баллы: 0</div>
@@ -37,8 +57,7 @@
         <button id="finishBtn" style="display: none;">Завершить сбор</button>
         <div id="matryoshkaContainer"></div>
 
-
-        <!-- Модальное окно -->
+        <!-- Окно для выхода из игры -->
         <div id="exitModal" style="display: none;">
             <div class="modal-background"></div>
             <div class="modal-content">
@@ -48,10 +67,21 @@
             </div>
         </div>
 
+        <!-- Окно для перепрохождения уровня -->
+        <div id="restartModal" style="display: none;">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <p>Желаете начать этот уровень заново?</p>
+                <button id="confirmRestart">Да</button>
+                <button id="cancelRestart">Нет</button>
+            </div>
+        </div>
+
     </div>
 
-    <script src="../js/game_1.js"></script>
+    <script src="../js/levels/game_1.js"></script>
     <script src="../js/logout.js"></script>
     <script src="../js/exit.js"></script>
+    <script src="../js/showInstruction.js"></script>
 </body>
 </html>

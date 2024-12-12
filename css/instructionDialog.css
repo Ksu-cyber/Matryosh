@@ -1,0 +1,35 @@
+#closeDialogButton {
+    background-color: #f0e9e9;
+    color: black;
+    width: 30%;
+    font-family: 'Squares Condensed Regular', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+#closeDialogButton:focus, #instructionDialog {
+    outline: none;
+}
+
+/* Стиль при наведении */
+#closeDialogButton:hover {
+    background-color: #BC7B77; /* Более темный при наведении */
+}
+
+#instructionDialog {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 0;
+}
+
+.instruction-dialog__list{
+    text-align: left;
+    list-style-type: disc;
+}

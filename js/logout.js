@@ -9,7 +9,11 @@ const logoutButton = document.getElementById('user-menu__link-exit');
 // }
 
 logoutButton.addEventListener('click', () => {
-    localStorage.removeItem('currentUser'); // Удаляем текущего пользователя
+    Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('currentUser')) {
+            localStorage.removeItem(key);
+        }
+    });
     alert('Вы вышли из аккаунта!');
     window.location.href = '../index.html'; // Возвращаем на страницу входа
 });
