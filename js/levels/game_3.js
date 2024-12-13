@@ -251,7 +251,10 @@ function calculateScore() {
 
 // Обновление счета
 function updateScore(score) {
-    scoreElement.innerText = `Баллы: ${score}`;
+    let score_lvl1 = (parseFloat(localStorage.getItem('currentUser_lvl1_score')) || 0);
+    let score_lvl2 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')) || 0);
+    let score_lvl3 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')) || 0);
+    scoreElement.innerText = `Баллы: ${score_lvl1 + score_lvl2 + score_lvl3}`;
 }
 
 function updateScoreBeforeStart() {
