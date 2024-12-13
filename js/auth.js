@@ -53,7 +53,7 @@ authForm.addEventListener('submit', (e) => {
             messageDiv.style.color = 'green';
             messageDiv.textContent = 'Успешный вход! Переход...';
             setTimeout(() => {
-                window.location.href = 'pages/game_level1.html'; // Редирект на другую страницу
+                window.location.href = 'game_level1.html'; // Редирект на другую страницу
             }, 2000); // Задержка 2 секунды
         } else {
             messageDiv.style.color = 'red';
