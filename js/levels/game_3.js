@@ -250,11 +250,10 @@ function calculateScore() {
 
 
 // Обновление счета
-function updateScore(score) {
+function updateScore() {
     let score_lvl1 = (parseFloat(localStorage.getItem('currentUser_lvl1_score')) || 0);
     let score_lvl2 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')) || 0);
-    let score_lvl3 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')) || 0);
-    scoreElement.innerText = `Баллы: ${score_lvl1 + score_lvl2 + score_lvl3}`;
+    scoreElement.innerText = `Баллы: ${score_lvl1 + score_lvl2 + score}`;
 }
 
 function updateScoreBeforeStart() {
@@ -265,10 +264,9 @@ function updateScoreBeforeStart() {
 
 
 function calculateFinalScore() {
-    let finalScore = (parseFloat(localStorage.getItem('currentUser_lvl1_score')) +
+    return (parseFloat(localStorage.getItem('currentUser_lvl1_score')) +
         parseFloat(localStorage.getItem('currentUser_lvl2_score')) +
-        parseFloat(localStorage.getItem('currentUser_lvl3_score'))) || 0;
-    return finalScore;
+        parseFloat(localStorage.getItem('currentUser_lvl3_score')) || 0);
 }
 
 function saveBestFinalScore(finalScore) {
@@ -289,7 +287,7 @@ function saveBestFinalScore(finalScore) {
 
 // Конец игры
 function endGame() {
-    let finalScore = calculateFinalScore();
+    let finalScore;
 
     isGameStarted = false;
     document.removeEventListener('keydown', handleSpacebarPress);
@@ -307,15 +305,15 @@ function endGame() {
         }, 1000);
 
     }
+    finalScore = calculateFinalScore();
 
     gameInfo.innerText = 'Игра завершена! Ваши баллы: ' + score;
-    updateScore(finalScore);
+    updateScore();
     saveScore(score);
-
 
     setTimeout(() => {
         const finalScoreP = document.createElement('p');
-        finalScoreP.innerText = `Ваш финальный счёт: ${finalScore}`;
+        finalScoreP.innerText = `Ваш лучший счёт: ${finalScore}`;
         restartModal.children[1].prepend(finalScoreP);
 
         restartModal.style.display = 'block'; // Показываем окно подтверждения
