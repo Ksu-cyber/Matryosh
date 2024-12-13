@@ -47,7 +47,7 @@ body, html {
     background-color: #f0e9e9;
 }
 
-.game-header__logo {
+#game-header__logo {
     position: absolute;
     top: 12px;
     left: 50%;

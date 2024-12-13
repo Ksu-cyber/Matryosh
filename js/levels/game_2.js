@@ -215,7 +215,7 @@ function calculateScore() {
     count = elements.length;
 
     if (count === neededCount && checkOrder() === true) {
-        points = (timeRemaining/ 6) + 20;
+        points = (timeRemaining/ 6) + 10 + count * 0.5;
 
         if (timeRemaining === 0) {
             points -= 7;
@@ -253,8 +253,7 @@ function endGame() {
         alert('Ошибка в сборке! Перепройдите уровень.');
         setTimeout(() => {
             location.reload();
-        }, 4000);
-
+        }, 1000);
     }
 
     gameInfo.innerText = 'Игра завершена! Ваши баллы: ' + score;
