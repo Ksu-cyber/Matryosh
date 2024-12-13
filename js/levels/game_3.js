@@ -5,8 +5,7 @@ let timer,
     draggedMatryoshka = null,
     neededMatryoshkaColor = 0,
     neededMatryoshkaCount = 0,
-    neededMatryoshkaName = 0,
-    currentScore = 0;
+    neededMatryoshkaName = 0;
 
 const matryoshkaColors = [
     {name: 'синих', color: '#46A5DE'},
@@ -22,6 +21,8 @@ const matryoshkaNames = [
     'Аннушка',
     'Ксюшенька'
 ];
+
+const showNextLvlBtn = document.getElementById('game-header__logo');
 
 const restartModal = document.getElementById('restartModal'),
     confirmRestartButton = document.getElementById('confirmRestart'),
@@ -78,7 +79,7 @@ function generateQuestion() {
     neededMatryoshkaCount = Math.floor(Math.random() * (max - min + 1)) + min;
     neededMatryoshkaName = Math.floor(Math.random() * matryoshkaNames.length);
 
-    gameInfo.innerHTML = `Собери матрёшку из <strong>${neededMatryoshkaCount}</strong> 
+    gameInfo.innerHTML = `Соберите матрёшку по возрастанию из <strong>${neededMatryoshkaCount}</strong> 
 <span style="color: ${(matryoshkaColors[neededMatryoshkaColor]).color};">${(matryoshkaColors[neededMatryoshkaColor]).name}</span> 
 матрёшек по имени <strong>${matryoshkaNames[neededMatryoshkaName]}</strong>  за 3 минуты!`;
 }
@@ -264,9 +265,10 @@ function updateScoreBeforeStart() {
 
 
 function calculateFinalScore() {
-    return (parseFloat(localStorage.getItem('currentUser_lvl1_score')) +
-        parseFloat(localStorage.getItem('currentUser_lvl2_score')) +
-        parseFloat(localStorage.getItem('currentUser_lvl3_score')) || 0);
+    let score_lvl1 = (parseFloat(localStorage.getItem('currentUser_lvl1_score')));
+    let score_lvl2 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')));
+    let score_lvl3 = (parseFloat(localStorage.getItem('currentUser_lvl3_score')));
+    return score_lvl1 + score_lvl2 + score_lvl3;
 }
 
 function saveBestFinalScore(finalScore) {
@@ -303,13 +305,13 @@ function endGame() {
         setTimeout(() => {
             location.reload();
         }, 1000);
-
     }
-    finalScore = calculateFinalScore();
 
     gameInfo.innerText = 'Игра завершена! Ваши баллы: ' + score;
     updateScore();
     saveScore(score);
+
+    finalScore = calculateFinalScore();
 
     setTimeout(() => {
         const finalScoreP = document.createElement('p');
@@ -407,3 +409,7 @@ function handleSpacebarPress(event) {
 
 document.addEventListener('keydown', handleSpacebarPress);
 updateScoreBeforeStart();
+
+showNextLvlBtn.addEventListener('click', () => {
+    window.location.href = 'rate.html';
+})

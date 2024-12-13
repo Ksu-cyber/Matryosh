@@ -19,6 +19,8 @@ const restartModal = document.getElementById('restartModal'),
     confirmRestartButton = document.getElementById('confirmRestart'),
     cancelRestartButton = document.getElementById('cancelRestart');
 
+const showNextLvlBtn = document.getElementById('game-header__logo');
+
 const timerDiv = document.getElementById('timer'),
     gameInfo = document.getElementById('gameInfo'),
     matryoshkaField = document.getElementById('matryoshkaField'),
@@ -69,7 +71,7 @@ function generateQuestion() {
     neededMatryoshkaColor = Math.floor(Math.random() * matryoshkaColors.length);
     neededCount = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    gameInfo.innerHTML = `Собери матрёшку из <strong>${neededCount}</strong> <span style="color: ${(matryoshkaColors[neededMatryoshkaColor]).color};">${(matryoshkaColors[neededMatryoshkaColor]).name}</span> матрёшек за 3 минуты!`;
+    gameInfo.innerHTML = `Соберите матрёшку по возрастанию из <strong>${neededCount}</strong> <span style="color: ${(matryoshkaColors[neededMatryoshkaColor]).color};">${(matryoshkaColors[neededMatryoshkaColor]).name}</span> матрёшек за 3 минуты!`;
 }
 
 
@@ -158,13 +160,18 @@ function createAndAnimateMatryoshka() {
 
     // Генерация случайной горизонтальной позиции
     const randomX = Math.random() * (window.innerWidth - 80);
+    const randomY = Math.random() * (window.innerHeight - 80);
+
+    console.log(randomY);
 
     // Начальная позиция сверху
     matryoshkaImage.style.left = `${randomX}px`;
+    matryoshkaImage.style.top = `${randomY}px`;
 
     // Запуск анимации (перемещение вниз)
     setTimeout(() => {
-        matryoshkaImage.style.top = `${window.innerHeight - 95}px`;  // Позиция чуть выше нижней части окна
+        matryoshkaImage.style.top = `${window.innerHeight - 95}px`
+        matryoshkaImage.style.left = `${window.innerWidth - 100}px`;;  // Позиция чуть выше нижней части окна
     }, 50); // Небольшая задержка, чтобы сработала анимация
 
 
@@ -347,3 +354,7 @@ function handleSpacebarPress(event) {
 
 document.addEventListener('keydown', handleSpacebarPress);
 updateScoreBeforeStart();
+
+showNextLvlBtn.addEventListener('click', () => {
+    window.location.href = 'game_level3.html';
+})

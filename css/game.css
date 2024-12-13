@@ -48,12 +48,12 @@
 .matryoshka {
     position: absolute;
     top: 0;
+    left: 0;
     width: 80px;
-    transition: transform 1s ease-out, top 1s ease-out;
+    transition: transform 2s ease-out, top 2s ease-out, left 2s ease-out;
     opacity: 1;
     cursor: pointer;
 }
-
 
 
 #finishBtn {

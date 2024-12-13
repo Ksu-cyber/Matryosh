@@ -1,5 +1,6 @@
 const instructionDialog = document.getElementById("instructionDialog");
 const closeInstructionDialogBtn = document.getElementById("closeDialogButton");
+const linkInstructionDialogBtn = document.getElementById("user-menu__link-user-menu__item-instruction");
 
 window.addEventListener('load', () => {
     instructionDialog.showModal();
@@ -10,3 +11,9 @@ closeInstructionDialogBtn.addEventListener('click', () => {
     instructionDialog.close();
     document.addEventListener('keydown', handleSpacebarPress);
 });
+
+linkInstructionDialogBtn.addEventListener('click', () => {
+    instructionDialog.showModal();
+    document.removeEventListener('keydown', handleSpacebarPress);
+    document.removeEventListener('keydown', handleKeyPress);
+})
