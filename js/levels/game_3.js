@@ -124,7 +124,7 @@ function handleDropInField(e) {
     draggedMatryoshka.style.left = `${newX}px`;
     draggedMatryoshka.style.top = `${newY}px`;
 
-    // Динамически обавляем элемент в блок
+    // Динамически обновляем элемент в блок
     matryoshkaField.append(draggedMatryoshka);
 }
 
@@ -138,18 +138,6 @@ function handleDropInContainer(e) {
     draggedMatryoshka.style.left = "0";
     draggedMatryoshka.style.top = "0";
     matryoshkaContainer.append(draggedMatryoshka);
-}
-
-
-function handleDropInField1(e) {
-    e.preventDefault();
-
-    draggedMatryoshka.classList.add('is-dragging');
-    // Возвращаем позиционирование к относительному
-    draggedMatryoshka.style.position = "relative";
-    draggedMatryoshka.style.left = "0";
-    draggedMatryoshka.style.top = "0";
-    matryoshkaField.append(draggedMatryoshka);
 }
 
 
@@ -172,8 +160,8 @@ function createAndAnimateMatryoshka() {
 
     matryoshkaDiv.classList.add('matryoshka');  // Добавляем класс для анимации
     matryoshkaDiv.draggable = true;
-    matryoshkaDiv.setAttribute('data-color', randomNum);
-    matryoshkaDiv.setAttribute('data-name', randomName);
+    matryoshkaDiv.setAttribute('data-color', 'randomNum');
+    matryoshkaDiv.setAttribute('data-name', 'randomName');
 
     // Добавляем матрёшку в контейнер
     matryoshkaDiv.append(matryoshkaImage);
@@ -217,7 +205,7 @@ function createAndAnimateMatryoshka() {
     });
 
     // Назначаем перетаскивание
-    matryoshkaDiv.addEventListener("dragstart", function(e) {
+    matryoshkaDiv.addEventListener("dragstart", function() {
         draggedMatryoshka = matryoshkaDiv; // Сохраняем ссылку на перетаскиваемую матрешку
     });
 }
@@ -231,8 +219,8 @@ finishBtn.addEventListener('click', () => {
 
 // // Подсчет очков
 function calculateScore() {
-    let count = 0;
-    let elements = null;
+    let count;
+    let elements;
     let points = 0;
 
     elements = matryoshkaField.querySelectorAll('.matryoshka')
@@ -265,9 +253,10 @@ function updateScoreBeforeStart() {
 
 
 function calculateFinalScore() {
-    let score_lvl1 = (parseFloat(localStorage.getItem('currentUser_lvl1_score')));
-    let score_lvl2 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')));
-    let score_lvl3 = (parseFloat(localStorage.getItem('currentUser_lvl3_score')));
+    let score_lvl1 = (parseFloat(localStorage.getItem('currentUser_lvl1_score')) || 0);
+    let score_lvl2 = (parseFloat(localStorage.getItem('currentUser_lvl2_score')) || 0);
+    let score_lvl3 = (parseFloat(localStorage.getItem('currentUser_lvl3_score')) || 0);
+
     return score_lvl1 + score_lvl2 + score_lvl3;
 }
 
@@ -301,7 +290,7 @@ function endGame() {
 
     if (score === 0)
     {
-        alert('Ошибка в сборке! Перепройдите уровень.');
+        alert('Ошибка в сборке! Пройдите уровень заново.');
         setTimeout(() => {
             location.reload();
         }, 1000);
@@ -315,7 +304,7 @@ function endGame() {
 
     setTimeout(() => {
         const finalScoreP = document.createElement('p');
-        finalScoreP.innerText = `Ваш лучший счёт: ${finalScore}`;
+        finalScoreP.innerText = `Ваш лучший счёт за игру: ${finalScore}`;
         restartModal.children[1].prepend(finalScoreP);
 
         restartModal.style.display = 'block'; // Показываем окно подтверждения
