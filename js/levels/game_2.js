@@ -245,7 +245,7 @@ function endGame() {
 
     if (score === 0)
     {
-        alert('Ошибка в сборке! Перепройдите уровень.');
+        alert('Ошибка в сборке! Пройдите уровень заново.');
         setTimeout(() => {
             location.reload();
         }, 1000);

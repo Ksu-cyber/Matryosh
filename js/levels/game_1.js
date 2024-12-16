@@ -128,18 +128,6 @@ function handleDropInContainer(e) {
 }
 
 
-function handleDropInField1(e) {
-    e.preventDefault();
-
-    draggedMatryoshka.classList.add('is-dragging');
-    // Возвращаем позиционирование к относительному
-    draggedMatryoshka.style.position = "relative";
-    draggedMatryoshka.style.left = "0";
-    draggedMatryoshka.style.top = "0";
-    matryoshkaField.append(draggedMatryoshka);
-}
-
-
 function createAndAnimateMatryoshka() {
     matryoshkaContainer.innerHTML = "";
 
@@ -213,7 +201,7 @@ function calculateScore() {
     elements = matryoshkaField.querySelectorAll('.matryoshka')
     count = elements.length;
 
-    if (count > 1 && checkOrder() == true) {
+    if (count > 1 && checkOrder() === true) {
         points = (timeRemaining/ 6) + count * 3;
 
         if (timeRemaining === 0) {
@@ -243,7 +231,7 @@ function endGame() {
 
     if (score === 0)
     {
-        alert('Ошибка в сборке! Перепройдите уровень.');
+        alert('Ошибка в сборке! Пройдите уровень заново.');
         setTimeout(() => {
             location.reload();
         }, 1000);

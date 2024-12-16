@@ -15,5 +15,5 @@ logoutButton.addEventListener('click', () => {
         }
     });
     alert('Вы вышли из аккаунта!');
-    window.location.href = '../index.html'; // Возвращаем на страницу входа
+    window.location.href = 'index.html'; // Возвращаем на страницу входа
 });

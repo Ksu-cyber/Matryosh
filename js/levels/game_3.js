@@ -160,8 +160,8 @@ function createAndAnimateMatryoshka() {
 
     matryoshkaDiv.classList.add('matryoshka');  // Добавляем класс для анимации
     matryoshkaDiv.draggable = true;
-    matryoshkaDiv.setAttribute('data-color', 'randomNum');
-    matryoshkaDiv.setAttribute('data-name', 'randomName');
+    matryoshkaDiv.setAttribute('data-color', randomNum);
+    matryoshkaDiv.setAttribute('data-name', randomName);
 
     // Добавляем матрёшку в контейнер
     matryoshkaDiv.append(matryoshkaImage);
