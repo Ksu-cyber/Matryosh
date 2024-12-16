@@ -330,12 +330,6 @@ function checkOrder() {
     return true;
 }
 
-// // Вызываем функцию для проверки порядка после того, как элементы были перетащены или перемещены
-// matryoshkaField.addEventListener("drop", function (e) {
-//     handleDropInField(e);  // Обрабатываем перетаскивание
-//     checkOrder();  // Проверяем порядок по X и scale
-//     calculateScore();
-// });
 
 function handleSpacebarPress(event) {
     if (event.key === ' ' && !isGameStarted) {

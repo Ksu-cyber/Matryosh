@@ -131,18 +131,6 @@ function handleDropInContainer(e) {
 }
 
 
-function handleDropInField1(e) {
-    e.preventDefault();
-
-    draggedMatryoshka.classList.add('is-dragging');
-    // Возвращаем позиционирование к относительному
-    draggedMatryoshka.style.position = "relative";
-    draggedMatryoshka.style.left = "0";
-    draggedMatryoshka.style.top = "0";
-    matryoshkaField.append(draggedMatryoshka);
-}
-
-
 function createAndAnimateMatryoshka() {
     matryoshkaContainer.innerHTML = "";
 
@@ -171,7 +159,7 @@ function createAndAnimateMatryoshka() {
     // Запуск анимации (перемещение вниз)
     setTimeout(() => {
         matryoshkaImage.style.top = `${window.innerHeight - 95}px`
-        matryoshkaImage.style.left = `${window.innerWidth - 100}px`;;  // Позиция чуть выше нижней части окна
+        matryoshkaImage.style.left = `${window.innerWidth - 100}px`;  // Позиция чуть выше нижней части окна
     }, 50); // Небольшая задержка, чтобы сработала анимация
 
 
@@ -200,7 +188,7 @@ function createAndAnimateMatryoshka() {
     });
 
     // Назначаем перетаскивание
-    matryoshkaImage.addEventListener("dragstart", function(e) {
+    matryoshkaImage.addEventListener("dragstart", function() {
         draggedMatryoshka = matryoshkaImage; // Сохраняем ссылку на перетаскиваемую матрешку
     });
 }
@@ -214,8 +202,8 @@ finishBtn.addEventListener('click', () => {
 
 // // Подсчет очков
 function calculateScore() {
-    let count = 0;
-    let elements = null;
+    let count;
+    let elements;
     let points = 0;
 
     elements = matryoshkaField.querySelectorAll('.matryoshka')
